@@ -12,6 +12,7 @@ const cli = meow(
 
   Options
     --dry-run Dry run mode.
+    --ci Enable checks for a CI environment. Pass '--no-ci' to disable checks.
     --debug Output debugging information.
     --sequential-init  Avoid hypothetical concurrent initialization collisions.
     --sequential-prepare  Avoid hypothetical concurrent preparation collisions. Do not use if your project have cyclic dependencies.
@@ -69,6 +70,13 @@ const cli = meow(
 			},
 			dryRun: {
 				type: "boolean",
+			},
+			ci: {
+				type: "boolean",
+			},
+			branches: {
+				type: "string",
+				isMultiple: true,
 			},
 		},
 	}

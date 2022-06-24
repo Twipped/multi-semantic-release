@@ -15,6 +15,7 @@ describe("getConfig()", () => {
 			ignorePackages: [],
 			tagFormat: "${name}@${version}",
 			dryRun: undefined,
+			ci: undefined,
 			deps: {
 				bump: "override",
 				release: "patch",
@@ -42,8 +43,32 @@ describe("getConfig()", () => {
 			ignorePackages: ["!packages/d/**"],
 			tagFormat: "${name}@${version}",
 			dryRun: false,
+			ci: undefined,
 			deps: {
 				bump: "inherit",
+				release: "patch",
+				prefix: "",
+			},
+		});
+	});
+
+	test("CI flag and default options", async () => {
+		const cliFlags = {
+			ci: false,
+		};
+		const result = await getConfig(process.cwd(), cliFlags);
+		expect(result).toMatchObject({
+			sequentialInit: false,
+			sequentialPrepare: true,
+			firstParent: false,
+			debug: false,
+			ignorePrivate: true,
+			ignorePackages: [],
+			tagFormat: "${name}@${version}",
+			dryRun: undefined,
+			ci: false,
+			deps: {
+				bump: "override",
 				release: "patch",
 				prefix: "",
 			},
@@ -63,6 +88,7 @@ describe("getConfig()", () => {
 			ignorePackages: ["!packages/d/**"],
 			tagFormat: "${name}@${version}",
 			dryRun: undefined,
+			ci: undefined,
 			deps: {
 				bump: "inherit",
 				release: "patch",
@@ -91,6 +117,7 @@ describe("getConfig()", () => {
 			ignorePackages: ["!packages/d/**", "!packages/c/**"],
 			tagFormat: "${name}@${version}",
 			dryRun: undefined,
+			ci: undefined,
 			deps: {
 				bump: "inherit",
 				release: "minor",
@@ -112,6 +139,7 @@ describe("getConfig()", () => {
 			ignorePackages: ["!packages/d/**"],
 			tagFormat: "${name}@${version}",
 			dryRun: undefined,
+			ci: undefined,
 			deps: {
 				bump: "satisfy",
 				release: "patch",
@@ -140,6 +168,7 @@ describe("getConfig()", () => {
 			ignorePackages: ["!packages/d/**", "!packages/c/**"],
 			tagFormat: "${name}@${version}",
 			dryRun: undefined,
+			ci: undefined,
 			deps: {
 				bump: "satisfy",
 				release: "minor",
